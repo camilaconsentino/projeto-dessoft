@@ -1,0 +1,4 @@
+def normaliza(d):
+    saida = {}
+    for continente, pais in d.items():
+        saida[pais] = 
