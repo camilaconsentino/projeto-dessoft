@@ -45,12 +45,12 @@ def sorteia_letra(p, rest):
 #normaliza base de países
 def normaliza(d):
     saida = {}
-    for pais in d.values():
+    for continente, pais in d.items():
         for k, v in pais.items():
             saida[k] = {}
             for key, value in v.items():
                 saida[k][key] = value
-            
+            saida[k]['continente'] = continente
     return saida
 
 
