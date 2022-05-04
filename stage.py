@@ -13,9 +13,11 @@ print('dica ---------- entra no mercado de dicas')
 print('desistir ------ sai da rodada atual')
 print('inventario ---- mostra sua posicao')
 
-
 continuar = True
-comando = input('Digite o pais: ')
+comando = input('Digite o comando: ')
+
+contador_tentativas = 0
+tentativas = []
 
 while continuar:
     continuar = comando
@@ -28,6 +30,7 @@ while continuar:
 
     elif comando == 'desistir':
         continuar = False
+    
     comando = input('Chute um país! \n')
 
 
