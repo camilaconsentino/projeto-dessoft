@@ -1,6 +1,8 @@
-#distância de haversine
+#bibliotecas 
 from math import *
+import random
 
+#distância de haversine
 def haversine(r, laA, loA, laB, loB):
     la = (sin((laB - laA)/2))**2
     lo = (sin((loB - loA)/2))**2
@@ -10,8 +12,6 @@ def haversine(r, laA, loA, laB, loB):
 
 
 #sorteando países
-import random
-
 def sorteia_pais(p):
     paises = []
     for k in p.keys():
