@@ -21,14 +21,13 @@ def sorteia_pais(p):
 
 
 #está na lista
-def esta_na_lista(p, l):
-    paises = []
-    for i in l:
-        paises.append(i[0])
-    if p in paises:
+def esta_na_lista(palpite, palpites_anteriores):
+    if palpite in palpites_anteriores:
         return True
     else:
         return False
+# se retornar True, print 'voce ja tentou esse pais' e print comando dnv (e nao perde uma tentativa)
+# se retornar False, chamamos a funcao adiciona_em_ordem
 
 
 #sorteia letra com restricoes
@@ -55,25 +54,37 @@ def normaliza(d):
 
 
 #add paises em lista ordenada
-def adiciona_em_ordem(pais, distancia, lista_paisdistancia):
-    lista = [pais, distancia]
+def adiciona_em_ordem(palpite, distancia, palpites_anteriores):
+    lista = [palpite, distancia]
     nova = []
 
-    if len(lista_paisdistancia) == 0:
+    if len(palpites_anteriores) == 0:
         nova.append(lista)
 
-    for listas in lista_paisdistancia:
+    for listas in palpites_anteriores:
         if listas[1] > distancia and lista not in nova:
             nova.append(lista)
             nova.append(listas)
+            
         elif listas[1] > distancia:
-            nova.append(listas)
-                        
+            nova.append(listas)         
                         
         elif listas[1] < distancia: 
             nova.append(listas)
 
     if lista not in nova:
         nova.append(lista)
-            
+     
     return nova
+
+
+#função para sortear cor da bandeira
+def sorteira_cor(dicband, verificacores, paissorteado):
+    for pais, cores in dicband.items():
+        if pais == paissorteado:
+            cor = random.choice(cores)
+            while cor in verificacores:
+                cor = random.choice(cores)
+                verificacores.append(cor)
+            return verificacores
+
