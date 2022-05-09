@@ -1,7 +1,53 @@
 #front end EP2
+#import emoji
+from math import *
+import random
+from funcoes import normaliza, haversine, sorteia_pais, esta_na_lista, sorteia_letra, adiciona_em_ordem, sorteia_cor
+from dicionario import hacker
 
-from sympy import are_similar
-import emoji
+
+#definindo variaveis
+a = ''
+dados_iniciais = hacker(a)
+
+#raio
+raio = 6371
+
+#tentativas
+tentativas = 20
+
+#normalizando base:
+dados_paises = normaliza(dados_iniciais)
+
+#país sorteado:
+pais_sorteado = sorteia_pais(dados_paises)
+
+#criando dicionarios
+paises = []
+bandeiras = {}
+capitais = {}
+areas = {}
+populacoes = {}
+continentes = {}
+latitudes = {}
+longitudes = {}
+
+for pais, dados in dados_paises.items():
+    paises.append(pais)
+    areas[pais] = dados['area']
+    populacoes[pais] = dados['populacao']
+    capitais[pais] = dados['capital']
+    latitudes[pais] = dados['geo']['latitude']
+    longitudes[pais] = dados['geo']['longitude']
+    continentes[pais] = dados['continente']
+    bandeiras[pais] = []
+    for cor, value in dados['bandeira'].items():
+        if value != 0:
+            bandeiras[pais].append(cor)
+
+
+
+#inicializando            
 
 print('------------------------')
 print('|                      |')
@@ -16,8 +62,10 @@ print('dica ---------- entra no mercado de dicas')
 print('desistir ------ sai da rodada atual')
 print('inventario ---- mostra sua posicao')
 
+
+
 continuar = True
-comando = input('Qual o seu palpite? ')
+comando = input('Chute um país! {0}\n' .format('\U0001F929'))
 
 tentativas = 20
 
@@ -35,7 +83,7 @@ while continuar:
         print('3. Área -------------> custa 6 tentativas')
         print('4. População --------> custa 5 tentativas')
         print('5. Continente -------> custa 7 tentativas')
-        print('0. Sem dicas --------> {0}' .format(emoji.emojize(':zipper_mouth_face')))
+        print('0. Sem dicas --------> {0}' .format('\U0001F910'))
 
         dica = input('Escolha sua dica [0|1|2|3|4|5]: ')
 
@@ -46,7 +94,7 @@ while continuar:
                 verifica_cores = []
                 cor_sorteada = sorteia_cor(bandeiras, verifica_cores, pais_sorteado)
                 verifica_cores.append(cor_sorteada)
-                print(f'Dica: {0}' .format(verifica_cores))
+                print('Dica: {0}' .format(verifica_cores))
 
             else: #tentar ver o bang das cores
                 print('Você não tem saldo! {0} \n' .format('\U0001F643'))
@@ -59,7 +107,7 @@ while continuar:
                 capital = capitais[pais_sorteado]
                 letra = sorteia_letra(capital, letras_sorteadas)
                 letras_sorteadas.append(letra)
-                print(f'Letra da capital: {0}' .format(letras_sorteadas))
+                print('Letra da capital: {0}' .format(letras_sorteadas))
 
             else: #tentar ver o bang das cores
                 print('Você não tem saldo! {0} \n' .format('\U0001F643'))
@@ -69,7 +117,7 @@ while continuar:
             if tentativas >= 6:
                 tentativas -= 6
                 area = areas[pais_sorteado]
-                print(f'Área do país é: {0}'.format(area))
+                print('Área do país é: {0}'.format(area))
 
             else: #tentar ver o bang das cores
                 print('Você não tem saldo! {0} \n' .format('\U0001F643'))
@@ -79,7 +127,7 @@ while continuar:
             if tentativas >= 5:
                 tentativas -= 5
                 populacao = populacoes[pais_sorteado]
-                print(f'A população do país é: {0}' .format(populacao))
+                print('A população do país é: {0}' .format(populacao))
             
             else: #tentar ver o bang das cores
                 print('Você não tem saldo! {0} \n' .format('\U0001F643'))
@@ -89,14 +137,14 @@ while continuar:
             if tentativas >= 7:
                 tentativas -= 7
                 continente = continentes[pais_sorteado]
-                print(f'O continente do país é: {0}'.format(continente))
+                print('O continente do país é: {0}'.format(continente))
             
             else: #tentar ver o bang das cores
                 print('Você não tem saldo! {0} \n' .format('\U0001F643'))
 
 
     elif comando == 'inventario':
-        print('Você ainda tem {0} tentativas! {1}' .format(tentativas, '\U0001F618') 
+        print('Você ainda tem {0} tentativas! {1}' .format(tentativas, '\U0001F618')) 
 
     elif comando == 'desistir':
         continuar = False
@@ -118,15 +166,18 @@ while continuar:
     else:
         palpites_anteriores = [] 
         distancia = haversine(raio, latitudes[pais_sorteado], longitudes[pais_sorteado], latitudes[comando], longitudes[comando])
-        esta_na_lista = esta_na_lista(comando, palpites_anteriores)
+        estanalista = esta_na_lista(comando, palpites_anteriores)
 
-        if esta_na_lista == True:
+        if estanalista == True:
             print('Voce já tentou esse país! {0}' .format('\U0001F644'))
 
         else:
             palpites_anteriores = adiciona_em_ordem(comando, distancia, palpites_anteriores)
+            
             for palpite in palpites_anteriores:
-                print(f' pais: {0} -> distancia: {1}' .format(palpite[0], palpite[1]))
+                dis = palpite[1]
+                nome = palpite[0]
+                print(' pais: {0} -> distancia: {1}' .format(nome, dis))
 
 
     comando = input('Chute um país! {0}\n' .format('\U0001F929'))
