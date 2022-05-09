@@ -1,7 +1,7 @@
 #front end EP2
 
 from sympy import are_similar
-
+import emoji
 
 print('------------------------')
 print('|                      |')
@@ -26,11 +26,18 @@ while continuar:
     if comando == 'dica':
         print('_______________________')
         print('________MERCADO________')
-        print('___________DE__________') #acabar depois
+        print('___________DE__________') 
         print('_________DICAS_________')
         print('_______________________')
 
-        dica = input('Escolha sua dica: [0|1|2|3|4|5]: ')
+        print('1. Cor da bandeira --> custa 4 tentativas')
+        print('2. Letra da capital -> custa 3 tentativas')
+        print('3. Área -------------> custa 6 tentativas')
+        print('4. População --------> custa 5 tentativas')
+        print('5. Continente -------> custa 7 tentativas')
+        print('0. Sem dicas --------> {0}' .format(emoji.emojize(':zipper_mouth_face')))
+
+        dica = input('Escolha sua dica [0|1|2|3|4|5]: ')
 
         #cor da bandeira
         if dica == '1':
@@ -42,52 +49,61 @@ while continuar:
                 print(f'Dica: {0}' .format(verifica_cores))
 
             else: #tentar ver o bang das cores
-                print('Você não tem saldo!\n')
+                print('Você não tem saldo! {0} \n' .format('\U0001F643'))
         
         #letra da capital
         elif dica == '2':
             if tentativas >= 3:
                 tentativas -= 3
                 letras_sorteadas = []
-                capital = ''
-                for pais, cap in capitais.items():
-                    if pais == pais_sorteado:
-                        capital = cap
+                capital = capitais[pais_sorteado]
                 letra = sorteia_letra(capital, letras_sorteadas)
                 letras_sorteadas.append(letra)
                 print(f'Letra da capital: {0}' .format(letras_sorteadas))
 
-            else: #cores no mercado de dicas
-                print('Você não tem saldo!\n')
+            else: #tentar ver o bang das cores
+                print('Você não tem saldo! {0} \n' .format('\U0001F643'))
         
         #area
         elif dica == '3':
             if tentativas >= 6:
                 tentativas -= 6
-                area = dados[pais_sorteado]['area']
-                print(f'Área do país é: {1}'.format(area))
+                area = areas[pais_sorteado]
+                print(f'Área do país é: {0}'.format(area))
 
-            else:
-                print('Você não tem saldo!\n')
+            else: #tentar ver o bang das cores
+                print('Você não tem saldo! {0} \n' .format('\U0001F643'))
 
         #populacao
         elif dica == '4':
             if tentativas >= 5:
                 tentativas -= 5
-                populacao = dados[pais_sorteado]['populacao']
-                print(f)
+                populacao = populacoes[pais_sorteado]
+                print(f'A população do país é: {0}' .format(populacao))
+            
+            else: #tentar ver o bang das cores
+                print('Você não tem saldo! {0} \n' .format('\U0001F643'))
 
+        #continente
+        elif dica == '5':
+            if tentativas >= 7:
+                tentativas -= 7
+                continente = continentes[pais_sorteado]
+                print(f'O continente do país é: {0}'.format(continente))
+            
+            else: #tentar ver o bang das cores
+                print('Você não tem saldo! {0} \n' .format('\U0001F643'))
 
 
     elif comando == 'inventario':
-        print(tentativas) 
+        print('Você ainda tem {0} tentativas! {1}' .format(tentativas, '\U0001F618') 
 
     elif comando == 'desistir':
         continuar = False
 
     elif comando == pais_sorteado:
-        print('Voce acertou!')
-        repete = input('Jogar novamente [s|n]?  ')
+        print('Você acertou! {0}' .format('\U0001F606'))
+        repete = input('Jogar novamente [s|n]? {0}' .format('\U0001F60D'))
 
         if repete == 's':
             continuar
@@ -96,7 +112,7 @@ while continuar:
             continuar = False
 
     elif comando not in paises:
-        print('Esse pais não existe :/ ')
+        print('Esse pais não existe {0}' .format('\U0001F928'))
         
     
     else:
@@ -105,7 +121,7 @@ while continuar:
         esta_na_lista = esta_na_lista(comando, palpites_anteriores)
 
         if esta_na_lista == True:
-            print('Voce já tentou esse país!')
+            print('Voce já tentou esse país! {0}' .format('\U0001F644'))
 
         else:
             palpites_anteriores = adiciona_em_ordem(comando, distancia, palpites_anteriores)
@@ -113,8 +129,7 @@ while continuar:
                 print(f' pais: {0} -> distancia: {1}' .format(palpite[0], palpite[1]))
 
 
-
-    comando = input('Chute um país! \n')
+    comando = input('Chute um país! {0}\n' .format('\U0001F929'))
 
 
 
