@@ -11,6 +11,7 @@ dados_paises = normaliza(dados_iniciais)
 pais_sorteado = sorteia_pais(dados_paises)
 
 #criando dicionarios
+paises = []
 bandeiras = {}
 capitais = {}
 areas = {}
@@ -20,6 +21,7 @@ latitudes = {}
 longitudes = {}
 
 for pais, dados in dados_paises.items():
+    paises.append(pais)
     areas[pais] = dados['area']
     populacoes[pais] = dados['populacao']
     capitais[pais] = dados['capital']
