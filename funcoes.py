@@ -77,3 +77,15 @@ def adiciona_em_ordem(pais, distancia, lista_paisdistancia):
         nova.append(lista)
             
     return nova
+
+
+#função para sortear cor da bandeira
+def cor_da_bandeira(dicband, verificacores, paissorteado):
+    for pais, cores in dicband.items():
+        if pais == paissorteado:
+            cor = random.choice(cores)
+            while cor in verificacores:
+                cor = random.choice(cores)
+                verificacores.append(cor)
+            return verificacores
+
