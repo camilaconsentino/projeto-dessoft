@@ -5,7 +5,6 @@ import random
 from funcoes import normaliza, haversine, sorteia_pais, esta_na_lista, sorteia_letra, adiciona_em_ordem, sorteia_cor
 from dicionario import hacker
 
-
 #definindo variaveis
 a = ''
 dados_iniciais = hacker(a)
@@ -21,6 +20,9 @@ dados_paises = normaliza(dados_iniciais)
 
 #país sorteado:
 pais_sorteado = sorteia_pais(dados_paises)
+
+#palpites anteriores
+palpites_anteriores = []
 
 #criando dicionarios
 paises = []
@@ -69,20 +71,24 @@ if comando == 'desisto':
     continuar = False
 
 while continuar:
+    
+    distancia = haversine(raio, latitudes[pais_sorteado], longitudes[pais_sorteado], latitudes[comando], longitudes[comando])
+    estanalista = esta_na_lista(comando, palpites_anteriores)
+    if estanalista == True:
+        print('\nVocê já tentou esse país!{0}' .format('\U0001F644'))
+
+    if tentativas < 0:
+        break
 
     if comando == 'dica':
-        print('\n_______________________')
-        print('________MERCADO________')
-        print('___________DE__________') 
-        print('_________DICAS_________')
-        print('_______________________')
-
-        print('\n\n1. Cor da bandeira --> custa 4 tentativas')
+        print('\nMERCADO DE DICAS')        
+        print('------------------------------------------')
+        print('1. Cor da bandeira --> custa 4 tentativas')
         print('2. Letra da capital -> custa 3 tentativas')
         print('3. Área -------------> custa 6 tentativas')
         print('4. População --------> custa 5 tentativas')
         print('5. Continente -------> custa 7 tentativas')
-        print('0. Sem dicas --------> {0}' .format('\U0001F910'))
+        print('0. Sem dicas --------> {0}               ' .format('\U0001F910'))
 
         dica = input('\nEscolha sua dica [0|1|2|3|4|5]: ')
 
@@ -150,7 +156,7 @@ while continuar:
         break
 
     elif comando == pais_sorteado:
-        print('Você acertou! {0}' .format('\U0001F606'))
+        print('Você acertou!{0}' .format('\U0001F606'))
         repete = input('\nJogar novamente [s|n]?{0}' .format('\U0001F60D'))
 
         if repete == 's':
@@ -160,23 +166,14 @@ while continuar:
             continuar = False
 
     elif comando not in paises:
-        print('\nEsse pais não existe{0}' .format('\U0001F928'))
-        
-    
+        print('\nEsse pais não existe{0}' .format('\U0001F928'))    
+
     else:
-        palpites_anteriores = [] 
-        distancia = haversine(raio, latitudes[pais_sorteado], longitudes[pais_sorteado], latitudes[comando], longitudes[comando])
-        estanalista = esta_na_lista(comando, palpites_anteriores)
-
-        if estanalista == True:
-            print('\nVocê já tentou esse país!{0}' .format('\U0001F644'))
-
-        else:
-            palpites_anteriores = adiciona_em_ordem(comando, distancia, palpites_anteriores)
-            
-            for palpite in palpites_anteriores:
-                dis = palpite[1]
-                nome = palpite[0]
-                print('País: {0} -> Distância: {1:,.0f}km' .format(nome, dis))
+        palpites_anteriores = adiciona_em_ordem(comando, distancia, palpites_anteriores)
+        tentativas -= 1
+        for palpite in palpites_anteriores:
+            dis = palpite[1]
+            nome = palpite[0]
+            print('\nPaís: {0} -> Distância: {1:,.0f}km' .format(nome, dis))
 
     comando = input('\nChute um país!{0} ' .format('\U0001F929'))
