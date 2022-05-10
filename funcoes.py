@@ -85,6 +85,7 @@ def sorteia_cor(dicband, verificacores, paissorteado):
             cor = random.choice(cores)
             while cor in verificacores:
                 cor = random.choice(cores)
-                verificacores.append(cor)
+            verificacores.append(cor)
+            
             return verificacores
 
