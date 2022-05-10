@@ -79,7 +79,7 @@ def adiciona_em_ordem(palpite, distancia, palpites_anteriores):
 
 
 #função para sortear cor da bandeira
-def sorteira_cor(dicband, verificacores, paissorteado):
+def sorteia_cor(dicband, verificacores, paissorteado):
     for pais, cores in dicband.items():
         if pais == paissorteado:
             cor = random.choice(cores)
