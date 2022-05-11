@@ -27,6 +27,9 @@ palpites_anteriores = []
 #verifica cores:
 verifica_cores = []
 
+#letras
+letras_sorteadas = []
+
 #para nao repetir dicas
 dicas_repetidas = []
 
@@ -53,7 +56,9 @@ for pais, dados in dados_paises.items():
         if value != 0:
             bandeiras[pais].append(cor)
 
-
+print(capitais)
+capital = capitais[pais_sorteado]
+print(capital)
 
 #inicializando            
 
@@ -73,6 +78,8 @@ print('inventario ------ mostra sua posicao\n')
 
 continuar = True
 comando = input('\nChute um país!{0} ' .format('\U0001F929'))
+
+
 
 while continuar:
 
@@ -107,7 +114,6 @@ while continuar:
         elif dica == '2':
             if tentativas >= 3:
                 tentativas -= 3
-                letras_sorteadas = []
                 capital = capitais[pais_sorteado]
                 letra = sorteia_letra(capital, letras_sorteadas)
                 letras_sorteadas.append(letra)
