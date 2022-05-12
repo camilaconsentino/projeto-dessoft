@@ -87,12 +87,17 @@ comando = input(Fore.WHITE + '\nChute um país!{0} ' .format('\U0001F929'))
 
 while continuar:
 
-    if tentativas == 1:
+    if tentativas <= 0:
         print(Fore.WHITE +'\nAcabaram suas tentativas! O país correto era {0}\n' .format(pais_sorteado))
-        break
+        repete = input(Fore.WHITE + '\nJogar novamente [s|n]?{0}' .format('\U0001F60D'))
+        if repete == 's':
+            continuar
+
+        else: 
+            break
 
     if comando == 'dica':
-        if tentativas < 3:
+        if tentativas <= 3:
             print('\nMERCADO DE DICAS')        
             print('------------------------------------------')
             print(Fore.RED +'1. Cor da bandeira --> custa 4 tentativas')
@@ -179,7 +184,7 @@ while continuar:
                     tentativas -= 6
                     dicas_repetidas.append(dica)
 
-                print(Fore.WHITE + '\nÁrea do país é: {0}km2'.format(area))
+                print(Fore.WHITE + '\nÁrea do país é: {0}km²'.format(area))
 
             else: #tentar ver o bang das cores
                 print(Fore.RED + '\nVocê não tem saldo!{0}' .format('\U0001F643'))
@@ -214,7 +219,7 @@ while continuar:
         print(Fore.WHITE + '\nVocê ainda tem {0} tentativas!{1}' .format(tentativas, '\U0001F618')) 
 
     elif comando == 'desistir':
-        print(Fore.WHITE + '\nAté mais!\n')
+        print(Fore.WHITE + '\nAté mais!\n O pais era {0}' .format(pais_sorteado))
         break
 
     elif comando == pais_sorteado:
@@ -243,11 +248,11 @@ while continuar:
                 dis = palpite[1]
                 nome = palpite[0]
                 if dis <= 4000:
-                    print(Fore.GREEN + '\nPaís: {0} -> Distância: {1:,.0f}km' .format(nome, dis))
+                    print(Fore.GREEN + '\nPaís: {0} -> Distância: {1} km' .format(nome, int(dis)))
                 elif dis <= 9000:
-                    print(Fore.YELLOW + '\nPaís: {0} -> Distância: {1:,.0f}km' .format(nome, dis))
+                    print(Fore.YELLOW + '\nPaís: {0} -> Distância: {1} km' .format(nome, int(dis)))
                 else:
-                    print(Fore.RED + '\nPaís: {0} -> Distância: {1:,.0f}km' .format(nome, dis))
+                    print(Fore.RED + '\nPaís: {0} -> Distância: {1} km' .format(nome, int(dis)))
                 
 
     comando = input(Fore.WHITE + '\nChute um país!{0} ' .format('\U0001F929'))
