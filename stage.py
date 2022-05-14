@@ -37,6 +37,9 @@ letras_sorteadas = []
 #para nao repetir dicas
 dicas_repetidas = []
 
+#dic de dicas pro print
+lista_dicas = {}
+
 #criando dicionarios
 paises = []
 bandeiras = {}
@@ -86,7 +89,7 @@ comando = input(Fore.WHITE + '\nChute um país!{0} ' .format('\U0001F929'))
 
 
 while continuar:
-    lista_dicas = {}
+
     if tentativas <= 0:
         print(Fore.WHITE +'\nAcabaram suas tentativas! O país correto era {0}\n' .format(pais_sorteado))
         repete = input(Fore.WHITE + '\nJogar novamente [s|n]?{0}' .format('\U0001F60D'))
