@@ -162,7 +162,7 @@ while continuar:
             if tentativas >= 4:
                 tentativas -= 4
                 verifica_cores = sorteia_cor(bandeiras, verifica_cores, pais_sorteado)
-                print(verifica_cores)
+                
                 lista_dicas['Cor da bandeira'] = verifica_cores
                 for nome_dica,  dica in lista_dicas.items():
                     print('{0} -> {1}' .format(nome_dica, ", ".join(dica)))
