@@ -86,7 +86,7 @@ comando = input(Fore.WHITE + '\nChute um país!{0} ' .format('\U0001F929'))
 
 
 while continuar:
-
+    lista_dicas = {}
     if tentativas <= 0:
         print(Fore.WHITE +'\nAcabaram suas tentativas! O país correto era {0}\n' .format(pais_sorteado))
         repete = input(Fore.WHITE + '\nJogar novamente [s|n]?{0}' .format('\U0001F60D'))
@@ -159,7 +159,10 @@ while continuar:
             if tentativas >= 4:
                 tentativas -= 4
                 verifica_cores = sorteia_cor(bandeiras, verifica_cores, pais_sorteado)
-                print('Dica: {0}' .format(verifica_cores))
+                lista_dicas['Cor da bandeira'] = verifica_cores
+                for nome_dica,  dica in lista_dicas.items():
+                    print('{0} -> {1}' .format(nome_dica, dica))
+                #print('Cor da bandeira: {0}' .format(verifica_cores))
 
             else: #tentar ver o bang das cores
                 print(Fore.WHITE + '\nVocê não tem saldo!{0}' .format('\U0001F643'))
@@ -171,7 +174,10 @@ while continuar:
                 capital = capitais[pais_sorteado]
                 letra = sorteia_letra(capital, letras_sorteadas)
                 letras_sorteadas.append(letra)
-                print(Fore.WHITE + '\nLetra da capital: {0}' .format(letras_sorteadas))
+                lista_dicas['Letra da capital'] = letras_sorteadas
+                for nome_dica,  dica in lista_dicas.items():
+                    print('{0} -> {1}' .format(nome_dica, dica))
+                #print(Fore.WHITE + '\nLetra da capital: {0}' .format(letras_sorteadas))
 
             else: #tentar ver o bang das cores
                 print(Fore.WHITE + '\nVocê não tem saldo!{0}' .format('\U0001F643'))
@@ -183,8 +189,12 @@ while continuar:
                 if dica not in dicas_repetidas:
                     tentativas -= 6
                     dicas_repetidas.append(dica)
+                
+                    lista_dicas['Área do país'] = area
+                    for nome_dica,  dica in lista_dicas.items():
+                        print('{0} -> {1}' .format(nome_dica, dica))
 
-                print(Fore.WHITE + '\nÁrea do país é: {0}km²'.format(area))
+                #print(Fore.WHITE + '\nÁrea do país é: {0}km²'.format(area))
 
             else: #tentar ver o bang das cores
                 print(Fore.RED + '\nVocê não tem saldo!{0}' .format('\U0001F643'))
@@ -196,8 +206,12 @@ while continuar:
                 if dica not in dicas_repetidas:
                     tentativas -= 5
                     dicas_repetidas.append(dica)
+
+                    lista_dicas['População'] = populacao
+                    for nome_dica,  dica in lista_dicas.items():
+                        print('{0} -> {1}' .format(nome_dica, dica))
                 
-                print(Fore.WHITE + '\nA população do país é: {0} habitantes' .format(populacao))
+                #print(Fore.WHITE + '\nA população do país é: {0} habitantes' .format(populacao))
             
             else: #tentar ver o bang das cores
                 print(Fore.WHITE + '\nVocê não tem saldo!{0}' .format('\U0001F643'))
@@ -209,8 +223,12 @@ while continuar:
                 if dica not in dicas_repetidas:
                     tentativas -= 7
                     dicas_repetidas.append(dica)
+
+                    lista_dicas['Continente'] = continente
+                    for nome_dica,  dica in lista_dicas.items():
+                        print('{0} -> {1}' .format(nome_dica, dica))
                 
-                print(Fore.WHITE + '\nO continente do país é: {0}'.format(continente))
+                #print(Fore.WHITE + '\nO continente do país é: {0}'.format(continente))
             
             else: #tentar ver o bang das cores
                 print(Fore.RED +'\nVocê não tem saldo!{0}' .format('\U0001F643'))
