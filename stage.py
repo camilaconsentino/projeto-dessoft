@@ -162,9 +162,10 @@ while continuar:
             if tentativas >= 4:
                 tentativas -= 4
                 verifica_cores = sorteia_cor(bandeiras, verifica_cores, pais_sorteado)
+                print(verifica_cores)
                 lista_dicas['Cor da bandeira'] = verifica_cores
                 for nome_dica,  dica in lista_dicas.items():
-                    print('{0} -> {1}' .format(nome_dica, dica))
+                    print('{0} -> {1}' .format(nome_dica, ", ".join(dica)))
                 #print('Cor da bandeira: {0}' .format(verifica_cores))
 
             else: #tentar ver o bang das cores
@@ -179,7 +180,7 @@ while continuar:
                 letras_sorteadas.append(letra)
                 lista_dicas['Letra da capital'] = letras_sorteadas
                 for nome_dica,  dica in lista_dicas.items():
-                    print('{0} -> {1}' .format(nome_dica, dica))
+                    print('{0} -> {1}' .format(nome_dica, ", ".join(dica)))
                 #print(Fore.WHITE + '\nLetra da capital: {0}' .format(letras_sorteadas))
 
             else: #tentar ver o bang das cores
@@ -195,7 +196,7 @@ while continuar:
                 
                     lista_dicas['Área do país'] = area
                     for nome_dica,  dica in lista_dicas.items():
-                        print('{0} -> {1}' .format(nome_dica, dica))
+                        print('{0} -> {1}km²' .format(nome_dica, dica))
 
                 #print(Fore.WHITE + '\nÁrea do país é: {0}km²'.format(area))
 
@@ -212,7 +213,7 @@ while continuar:
 
                     lista_dicas['População'] = populacao
                     for nome_dica,  dica in lista_dicas.items():
-                        print('{0} -> {1}' .format(nome_dica, dica))
+                        print('{0} -> {1} habitantes' .format(nome_dica, dica))
                 
                 #print(Fore.WHITE + '\nA população do país é: {0} habitantes' .format(populacao))
             
@@ -240,7 +241,7 @@ while continuar:
         print(Fore.WHITE + '\nVocê ainda tem {0} tentativas!{1}' .format(tentativas, '\U0001F618')) 
 
     elif comando == 'desistir':
-        print(Fore.WHITE + '\nAté mais!\n O pais era {0}' .format(pais_sorteado))
+        print(Fore.WHITE + '\nAté mais!\nO pais era {0}' .format(pais_sorteado))
         break
 
     elif comando == pais_sorteado:
